@@ -4,6 +4,9 @@
 
 Code Safe leverages the power of Large Language Models (LLMs) to automatically discover complex, multi-step security vulnerabilities that traditional static analysis tools miss.
 
+**Author:** [Arhaan Girdhar](https://github.com/17arhaan)  
+**Repository:** [https://github.com/17arhaan/Code_Safe](https://github.com/17arhaan/Code_Safe)
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -15,7 +18,7 @@ Code Safe leverages the power of Large Language Models (LLMs) to automatically d
 
 1. **Clone and setup:**
 ```bash
-git clone <your-repo>
+git clone https://github.com/17arhaan/Code_Safe.git
 cd Code_Safe
 pip install -e .
 ```
@@ -150,6 +153,12 @@ This is your personal security analysis tool. Feel free to:
 - Add support for additional programming languages
 - Enhance the reporting format
 
+## 👨‍💻 Author
+
+**Arhaan Girdhar**  
+- GitHub: [@17arhaan](https://github.com/17arhaan)
+- Project Repository: [Code_Safe](https://github.com/17arhaan/Code_Safe)
+
 ## 📝 License
 
 This project is for personal use and security research purposes.
@@ -157,3 +166,5 @@ This project is for personal use and security research purposes.
 ---
 
 **Happy Bug Hunting! 🐛🔍**
+
+*Built with ❤️ by [Arhaan Girdhar](https://github.com/17arhaan)*
