@@ -1,0 +1,156 @@
+# Environment Variables & API Keys
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE & Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+code_safe.log
+vulnhuntr.log
+
+# Testing
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+htmlcov/
+.coverage.*
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# Poetry
+poetry.lock
+
+# Node.js & Next.js (for web UI)
+code-safe-ui/node_modules/
+code-safe-ui/.next/
+code-safe-ui/out/
+code-safe-ui/.env.local
+code-safe-ui/.env.development.local
+code-safe-ui/.env.test.local
+code-safe-ui/.env.production.local
+code-safe-ui/npm-debug.log*
+code-safe-ui/yarn-debug.log*
+code-safe-ui/yarn-error.log*
+code-safe-ui/.pnpm-debug.log*
+
+# Temporary Analysis Files
+temp/
+tmp/
+*.tmp
+analysis-*/
+
+# Docker
+.dockerignore
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+
+# Security & Sensitive Data
+secrets/
+private/
+*.key
+*.pem
+*.p12
+*.pfx
+api_keys.txt
+
+# Analysis Results (optional - uncomment if you don't want to track results)
+# reports/
+# results/
+# *.json
