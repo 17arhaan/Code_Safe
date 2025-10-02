@@ -153,4 +153,4 @@ api_keys.txt
 # Analysis Results (optional - uncomment if you don't want to track results)
 # reports/
 # results/
-# *.json
+# *.jsonfrontend.zip
