@@ -79,7 +79,7 @@ jobs:
 
     # Upload security reports as artifacts
     - name: Upload Security Reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: security-reports
@@ -156,7 +156,7 @@ jobs:
 
     # Upload coverage reports
     - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
         files: ./coverage.xml,./frontend/coverage/lcov.info
         flags: unittests
@@ -182,7 +182,7 @@ jobs:
         output: 'trivy-results.sarif'
 
     - name: Upload Trivy Results to GitHub Security
-      uses: github/codeql-action/upload-sarif@v2
+      uses: github/codeql-action/upload-sarif@v3
       if: always()
       with:
         sarif_file: 'trivy-results.sarif'
