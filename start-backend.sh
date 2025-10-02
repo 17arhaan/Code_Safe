@@ -1,10 +1,21 @@
 #!/bin/bash
 
-echo "🛡️  Code Safe Backend Ready!"
-echo "============================"
+echo "🛡️  Starting Code Safe Backend Server..."
+echo "========================================"
 echo ""
-echo "Usage examples:"
-echo "  code_safe -r /path/to/project"
-echo "  code_safe -r /path/to/project -a app.py -l gpt"
-echo "  code_safe --help"
+
+# Activate virtual environment
+source .venv/bin/activate
+
+# Start the FastAPI server
+cd backend
+echo "Starting server at http://localhost:8000"
+echo "API endpoints:"
+echo "  - GET  /health"
+echo "  - POST /api/analyze"
 echo ""
+echo "Press Ctrl+C to stop"
+echo ""
+
+python server.py
+

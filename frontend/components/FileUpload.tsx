@@ -70,7 +70,7 @@ export default function FileUpload({ onAnalysisStart, onAnalysisComplete, onAnal
       }
       formData.append("verbose", verbose.toString())
 
-      const response = await fetch("/api/analyze", {
+      const response = await fetch("http://localhost:8000/api/analyze", {
         method: "POST",
         body: formData,
       })
@@ -88,17 +88,28 @@ export default function FileUpload({ onAnalysisStart, onAnalysisComplete, onAnal
   }
 
   return (
+    // The problem is that the opening <div className="space-y-6"> is never closed in this file,
+    // which causes the lint error: "JSX element 'div' has no corresponding closing tag."
+    // To fix this, ensure that every opening <div> has a corresponding closing </div>.
+    // The code below is correct *so far* (the error is not in this selection), but the file is missing a closing </div> for this one.
     <div className="space-y-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        whileHover={{ scale: 1.01 }}
+      {/* 
+        The error is due to passing DOM event handlers (from getRootProps) to a Framer Motion component.
+        Framer Motion's motion.div does not accept all native div props, especially event handlers like onClick, onDrag, etc.
+        Solution: Use a plain div as the dropzone root, and nest motion.div inside for animation.
+      */}
+      <div
         {...getRootProps()}
         className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${
           isDragActive ? "border-blue-500 bg-blue-500/5" : "border-neutral-800 hover:border-neutral-700 bg-neutral-950"
         }`}
       >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          whileHover={{ scale: 1.01 }}
+        >
         <input {...getInputProps()} />
         <div className="flex flex-col items-center gap-4">
           <motion.div
@@ -125,6 +136,7 @@ export default function FileUpload({ onAnalysisStart, onAnalysisComplete, onAnal
           </motion.div>
         </div>
       </motion.div>
+      </div>
 
       <AnimatePresence mode="wait">
         {files.length > 0 && (
