@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Shield, Zap, AlertTriangle, CheckCircle, FileText } from 'lucide-react'
 import FileUpload from '@/components/FileUpload'
 import VulnerabilityReport from '@/components/VulnerabilityReport'
+import DetailedVulnerabilityReport from '@/components/DetailedVulnerabilityReport'
 import type { VulnerabilityResult } from '@/types/vulnerability'
 
 export default function Home() {
@@ -115,8 +116,9 @@ export default function Home() {
         )}
 
         {results && (
-          <div>
+          <div className="space-y-8">
             <VulnerabilityReport results={results} onReset={resetAnalysis} />
+            <DetailedVulnerabilityReport result={results} />
           </div>
         )}
       </main>

@@ -1,0 +1,146 @@
+# Pre-commit hooks for Code Safe project
+# Install with: pre-commit install
+
+repos:
+  # General code quality
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: mixed-line-ending
+      - id: fix-byte-order-marker
+
+  # Python code formatting and linting
+  - repo: https://github.com/psf/black
+    rev: 23.7.0
+    hooks:
+      - id: black
+        language_version: python3
+        args: [--line-length=88]
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args: [--profile=black, --line-length=88]
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+        args: [--max-line-length=88, --extend-ignore=E203,W503]
+        additional_dependencies:
+          - flake8-docstrings
+          - flake8-bugbear
+          - flake8-comprehensions
+          - flake8-simplify
+
+  # Python security scanning
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        args: [-r, backend/, -f, txt]
+        exclude: ^backend/tests/
+
+  # Python type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.5.1
+    hooks:
+      - id: mypy
+        additional_dependencies: [types-requests, types-PyYAML]
+        args: [--ignore-missing-imports, --no-strict-optional]
+
+  # Secrets detection
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+        exclude: package.lock.json
+
+  # Dockerfile linting
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint-docker
+        args: [--ignore, DL3008, --ignore, DL3009]
+
+  # YAML linting
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.32.0
+    hooks:
+      - id: yamllint
+        args: [-d, relaxed]
+
+  # Frontend code quality (if Node.js is available)
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier
+        entry: bash -c 'cd frontend && npx prettier --write'
+        language: system
+        files: \.(ts|tsx|js|jsx|json|css|md)$
+        exclude: ^frontend/node_modules/
+
+      - id: eslint
+        name: eslint
+        entry: bash -c 'cd frontend && npx eslint --fix'
+        language: system
+        files: \.(ts|tsx|js|jsx)$
+        exclude: ^frontend/node_modules/
+
+      - id: typescript-check
+        name: typescript-check
+        entry: bash -c 'cd frontend && npx tsc --noEmit'
+        language: system
+        files: \.(ts|tsx)$
+        exclude: ^frontend/node_modules/
+        pass_filenames: false
+
+  # Security scanning for dependencies
+  - repo: local
+    hooks:
+      - id: safety-check
+        name: safety-check
+        entry: safety check
+        language: system
+        pass_filenames: false
+
+      - id: npm-audit
+        name: npm-audit
+        entry: bash -c 'cd frontend && npm audit --audit-level=moderate'
+        language: system
+        pass_filenames: false
+
+  # License compliance
+  - repo: local
+    hooks:
+      - id: license-check
+        name: license-check
+        entry: bash -c 'pip-licenses --fail-on="GPL" && cd frontend && npx license-checker --failOn "GPL"'
+        language: system
+        pass_filenames: false
+
+# Configuration for specific tools
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+    for more information, see https://pre-commit.ci
+  autofix_prs: true
+  autoupdate_branch: ''
+  autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false
