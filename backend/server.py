@@ -51,11 +51,13 @@ def parse_analysis_output(output: str) -> dict:
                 for line in lines[:5]:  # Check first few lines for filename
                     if line.strip() and not line.startswith('-') and '/' in line:
                         filename = line.strip()
+                        # Clean up the filename to show only the actual file name
+                        clean_filename = filename.split('/')[-1] if '/' in filename else filename
                         # Remove the filename line from analysis text
                         analysis_text = '\n'.join(lines[lines.index(line)+1:])
                         break
                 if analysis_text.strip():
-                    file_analyses.append(parse_file_analysis(filename, analysis_text))
+                    file_analyses.append(parse_file_analysis(clean_filename, analysis_text))
         else:
             # Extract filename and analysis from this part
             lines = part.split('\n')
@@ -74,9 +76,11 @@ def parse_analysis_output(output: str) -> dict:
                 
                 if filename_lines:
                     filename = ''.join(filename_lines)
+                    # Clean up the filename to show only the actual file name
+                    clean_filename = filename.split('/')[-1] if '/' in filename else filename
                     analysis_text = '\n'.join(lines[analysis_start_idx:])
                     if analysis_text.strip():
-                        file_analyses.append(parse_file_analysis(filename, analysis_text))
+                        file_analyses.append(parse_file_analysis(clean_filename, analysis_text))
     
     # Calculate summary
     total_vulnerabilities = sum(len(fa['findings']) for fa in file_analyses)

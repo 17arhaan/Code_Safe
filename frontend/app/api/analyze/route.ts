@@ -104,8 +104,11 @@ async function formatAnalysisResult(rawOutput: string, analyzedFiles: string[]):
           const line = lines[j]
           if (line.trim() && !line.startsWith('-') && line.includes('/')) {
             filename = line.trim()
+            // Clean up the filename to show only the actual file name
+            const cleanFilename = filename.split('/').pop() || filename
             // Remove the filename line from analysis text
             analysisText = lines.slice(lines.indexOf(line) + 1).join('\n')
+            filename = cleanFilename
             break
           }
         }
@@ -137,9 +140,11 @@ async function formatAnalysisResult(rawOutput: string, analyzedFiles: string[]):
         
         if (filenameLines.length > 0) {
           filename = filenameLines.join('')
+          // Clean up the filename to show only the actual file name
+          const cleanFilename = filename.split('/').pop() || filename
           const analysisText = lines.slice(analysisStartIdx).join('\n')
           if (analysisText.trim()) {
-            fileAnalyses.push(parseFileAnalysis(filename, analysisText))
+            fileAnalyses.push(parseFileAnalysis(cleanFilename, analysisText))
           }
         }
       }
