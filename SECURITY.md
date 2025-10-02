@@ -208,5 +208,5 @@ We would like to thank the security researchers and community members who have h
 
 ---
 
-**Last Updated**: January 2025
-**Next Review**: April 2025
+**Last Updated**: October 2025
+**Next Review**: December 2025
