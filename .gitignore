@@ -4,7 +4,8 @@
 .env.development.local
 .env.test.local
 .env.production.local
-
+.github*
+.github
 # Python
 __pycache__/
 *.py[cod]
